@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>AR Marker</title>
+  <title>AI AR Marker</title>
 
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
@@ -10,18 +10,44 @@
   <style>
     body {
       margin: 0;
-      overflow: hidden;
+      font-family: Arial;
+    }
+
+    #ui {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 999;
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    input {
+      padding: 8px;
+      width: 220px;
+    }
+
+    button {
+      padding: 8px;
+      margin-left: 5px;
     }
   </style>
 </head>
 
 <body>
 
+<div id="ui">
+  <input id="prompt" placeholder="Bir prompt yaz">
+  <button onclick="generate()">Generate</button>
+</div>
+
 <a-scene embedded arjs>
 
   <a-marker type="pattern" url="pattern-R1.patt">
 
     <a-box
+      id="box"
       position="0 0.5 0"
       material="color: red;">
     </a-box>
@@ -31,6 +57,30 @@
   <a-entity camera></a-entity>
 
 </a-scene>
+
+<script>
+
+function generate() {
+
+  const prompt = document.getElementById("prompt").value;
+
+  const box = document.getElementById("box");
+
+  if(prompt.includes("blue")) {
+    box.setAttribute("material", "color: blue");
+  }
+
+  else if(prompt.includes("green")) {
+    box.setAttribute("material", "color: green");
+  }
+
+  else {
+    box.setAttribute("material", "color: red");
+  }
+
+}
+
+</script>
 
 </body>
 </html>
