@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>AR Pattern PNG</title>
+    <title>AR Marker R1</title>
 
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
@@ -10,14 +10,14 @@
 
   <body style="margin: 0; overflow: hidden;">
 
-    <a-scene embedded arjs="sourceType: webcam;">
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
 
-      <!-- PATTERN MARKER (promptu okuyan kısım gibi düşünebilirsin) -->
-      <a-marker type="pattern" url="pattern-marker.patt">
+      <!-- MARKER -->
+      <a-marker type="pattern" url="pattern-R1.patt">
 
-        <!-- PNG GÖRSELİ -->
+        <!-- PNG GÖRSEL -->
         <a-plane
-          src="resim.png"
+          src="pattern-R1.png"
           position="0 0 0"
           rotation="-90 0 0"
           width="1"
