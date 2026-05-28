@@ -2,16 +2,13 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>AI AR Marker</title>
+  <title>Prompt AR Marker</title>
 
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
   <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-    }
+    body { margin: 0; overflow: hidden; }
 
     #ui {
       position: absolute;
@@ -21,16 +18,18 @@
       background: white;
       padding: 10px;
       border-radius: 10px;
+      width: 250px;
     }
 
-    input {
-      padding: 8px;
-      width: 220px;
+    input, button {
+      width: 100%;
+      margin-top: 5px;
+      padding: 6px;
     }
 
-    button {
-      padding: 8px;
-      margin-left: 5px;
+    img {
+      width: 100%;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -38,16 +37,17 @@
 <body>
 
 <div id="ui">
-  <input id="prompt" placeholder="Bir prompt yaz">
+  <input id="prompt" placeholder="örnek: red dragon logo">
   <button onclick="generate()">Generate</button>
+
+  <img id="preview" />
 </div>
 
 <a-scene embedded arjs>
 
   <a-marker type="pattern" url="pattern-R1.patt">
 
-    <a-box
-      id="box"
+    <a-box id="box"
       position="0 0.5 0"
       material="color: red;">
     </a-box>
@@ -63,21 +63,37 @@
 function generate() {
 
   const prompt = document.getElementById("prompt").value;
+  const preview = document.getElementById("preview");
 
+  // FAKE AI IMAGE (şimdilik simülasyon)
+  const images = {
+    "dragon": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Dragon_icon.svg",
+    "cat": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg",
+    "default": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg"
+  };
+
+  if (prompt.includes("dragon")) {
+    preview.src = images.dragon;
+  }
+  else if (prompt.includes("cat")) {
+    preview.src = images.cat;
+  }
+  else {
+    preview.src = images.default;
+  }
+
+  // AR effect change (şimdilik bağlama)
   const box = document.getElementById("box");
 
-  if(prompt.includes("blue")) {
-    box.setAttribute("material", "color: blue");
+  if (prompt.includes("blue")) {
+    box.setAttribute("material", "color", "blue");
   }
-
-  else if(prompt.includes("green")) {
-    box.setAttribute("material", "color: green");
+  else if (prompt.includes("green")) {
+    box.setAttribute("material", "color", "green");
   }
-
   else {
-    box.setAttribute("material", "color: red");
+    box.setAttribute("material", "color", "red");
   }
-
 }
 
 </script>
